@@ -10,3 +10,4 @@ db/dumps/
 .rvmrc
 log/*
 Gemfile.lock
+coverage/
