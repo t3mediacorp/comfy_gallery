@@ -12,7 +12,7 @@
         <li id="<%= dom_id(photo) %>">
           <div class="photo" style="width: <%= @gallery.thumb_width %>px; height: <%= @gallery.thumb_height %>px;">
             <%= link_to photo.image.url(:full), :rel => "prettyPhoto[pp_gal]", :title => photo.description do %>
-              <%= image_tag(photo.image.url(:thumb), :alt => photo.description) %>
+              <%= image_tag(photo.image.url(:thumb), :alt => photo.title) %>
             <% end %>
           </div>
         </li>
