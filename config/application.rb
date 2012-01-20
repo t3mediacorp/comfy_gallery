@@ -6,10 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-module SofaGallery
+module ComfyGallery
   class Application < Rails::Application
     
-    require 'sofa_gallery'
+    require 'comfy_gallery'
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -44,8 +44,8 @@ module SofaGallery
     # Enable the asset pipeline
     config.assets.enabled = true
     
-    config.session_store :cookie_store, :key => '_comfortable_mexican_sofa_session'
-    config.secret_token = 'e0fef4ab56c1cacd8845864fe2cb2a27f5caad72523419f87b2774785187090a654b83229bf9cef70ce475a83bfa561dbbaa2015788181ea837c456964c1e0f6'
+    config.session_store :cookie_store, :key => '_comfy_blog_session'
+    config.secret_token = 'e0fef4ab56c1cace8845864fe2cb2a27f5caad72521419f87b2774785187090a654b83229bf9cef70ce475a83bfa561dbbaa2015788181ea837c456964c1e0f6'
     
   end
 end

@@ -1,0 +1,31 @@
+<% if @gallery %>
+  <!--[if IE]>
+       <style type="text/css">
+           .timer { display: none !important; }
+           div.caption { background:transparent; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);zoom: 1; }
+      </style>
+  <![endif]-->
+  <% content_for :head do %>
+    <%= javascript_include_tag "comfy_gallery/jquery.orbit-1.2.3.min.js" %>
+    <%= stylesheet_link_tag "comfy_gallery/carousel.css" %>
+  <% end %>
+  <% content_for :doc_ready do %>
+    $('#featured').orbit();
+  <% end %>
+  <% if @gallery.photos.count > 0 %>
+    <div id="featured">
+      <% @gallery.photos.order(:position).each do |photo| %>
+             <%= image_tag(photo.image.url(:full), :alt => photo.description, :id => dom_id(photo), :"data-caption" => "##{dom_id(photo)}htmlCaption") %>
+      <% end %>
+    </div>
+    <% @gallery.photos.reject{|p| p.description.blank?}.each do |photo| %>
+      <span class="orbit-caption" id="<%=dom_id(photo)%>htmlCaption">
+        <%= photo.description %>
+      </span>
+    <% end %>
+  <% else %>
+    <em>No photos in this gallery.</em>
+  <% end %>
+<% else %>
+  No images were found.
+<% end %>

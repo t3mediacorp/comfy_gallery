@@ -1,6 +1,6 @@
-//= require sofa_gallery/jquery.js
-//= require sofa_gallery/jquery_ui.js
-//= require sofa_gallery/rails.js
+//= require comfy_gallery/jquery.js
+//= require comfy_gallery/jquery_ui.js
+//= require comfy_gallery/rails.js
 
 $.SofaGallery = function(){
   $(function(){

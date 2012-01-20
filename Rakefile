@@ -2,17 +2,17 @@ require File.expand_path('../config/application', __FILE__)
 require 'rubygems'
 require 'rake'
 
-SofaGallery::Application.load_tasks
+ComfyGallery::Application.load_tasks
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name        = 'sofa_gallery'
-    gem.homepage    = 'http://github.com/twg/sofa-gallery'
+    gem.name        = 'comfy_gallery'
+    gem.homepage    = 'http://github.com/comfy/comfy-gallery'
     gem.license     = 'MIT'
-    gem.summary     = 'SofaGallery is an image gallery engine for Rails 3.1 apps (and ComfortableMexicanSofa)'
+    gem.summary     = 'ComfyGallery is an image gallery engine for Rails 3.1 apps (and ComfortableMexicanSofa)'
     gem.description = ''
-    gem.email       = 'stephen@theworkinggroup.ca'
+    gem.email       = 'oleg@twg.ca'
     gem.authors     = ['Oleg Khabarov', 'Stephen McLeod', 'The Working Group Inc.']
     gem.version     = File.read('VERSION').chomp
   end

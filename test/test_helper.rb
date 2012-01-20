@@ -1,6 +1,3 @@
-require 'simplecov'
-SimpleCov.start
-
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
@@ -16,11 +13,11 @@ class ActiveSupport::TestCase
   
   # resetting default configuration
   def reset_config
-    SofaGallery.configure do |config|
+    ComfyGallery.configure do |config|
       config.admin_route_prefix = 'admin'
       config.upload_options     = { }
       config.admin_controller   = 'ApplicationController'
-      config.form_builder       = 'SofaGallery::FormBuilder'
+      config.form_builder       = 'ComfyGallery::FormBuilder'
     end
   end
   

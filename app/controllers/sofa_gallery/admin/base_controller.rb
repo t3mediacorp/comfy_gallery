@@ -1,3 +1,0 @@
-class SofaGallery::Admin::BaseController < SofaGallery.config.admin_controller.to_s.constantize
-  # ...
-end

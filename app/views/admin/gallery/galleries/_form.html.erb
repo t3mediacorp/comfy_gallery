@@ -1,0 +1,18 @@
+<%= form.text_field :title, :id => (@gallery.new_record?? 'slugify' : nil)%>
+<%= form.text_field :slug, :id => 'slug' %>
+<%= form.text_area  :description%>
+
+<%= form.text_field :full_width %>
+<%= form.text_field :full_height %>
+<%= form.check_box :force_ratio_full, :label => "Force Ratio" %>
+<%= form.text_field :thumb_width %>
+<%= form.text_field :thumb_height %>
+<%= form.check_box :force_ratio_thumb, :label => "Force Ratio" %>
+
+<%= render :partial => 'cms_admin/categories/form', :object => form if defined?(ComfortableMexicanSofa) %>
+
+<%= form.simple_field nil, nil, :class => 'submit_element' do %>
+  <%= link_to "Cancel", admin_gallery_galleries_path, :id => 'cancel_btn' %>
+  <span>or</span>
+  <%= form.submit "Save", :disable_builder => true%>
+<% end %>
