@@ -13,7 +13,6 @@ class PhotoTest < ActiveSupport::TestCase
     assert photo.invalid?
     assert_has_errors_on photo, {
       :gallery_id       => ["can't be blank"],
-      :slug             => ["can't be blank", "is invalid"],
       :image_file_name  => ["There was no file uploaded!"]
     }
   end
@@ -24,7 +23,6 @@ class PhotoTest < ActiveSupport::TestCase
       Gallery::Photo.create!(
         :gallery  => gallery,
         :title    => 'Test Photo',
-        :slug     => 'test-photo',
         :image    => fixture_file_upload('/files/default.jpg', 'image/jpeg')
       )
     end

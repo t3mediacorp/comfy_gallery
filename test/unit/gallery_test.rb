@@ -11,19 +11,19 @@ class GalleryTest < ActiveSupport::TestCase
   def test_validations
     gallery = Gallery::Gallery.new
     assert gallery.invalid?
-    assert_has_errors_on gallery, [:title, :slug]
+    assert_has_errors_on gallery, [:title, :identifier]
   end
   
   def test_creation
     assert_difference 'Gallery::Gallery.count' do
       Gallery::Gallery.create!(
-        :title  => 'Test Gallery',
-        :slug   => 'test-gallery'
+        :title      => 'Test Gallery',
+        :identifier => 'test-gallery'
       )
     end
   end
   
-  def test_destoy
+  def test_destroy
     gallery = gallery_galleries(:default)
     assert_difference ['Gallery::Gallery.count', 'Gallery::Photo.count'], -1 do
       gallery.destroy

@@ -11,7 +11,7 @@ class Gallery::Gallery < ActiveRecord::Base
   validates :title,
     :presence => true
     
-  validates :slug,
+  validates :identifier,
     :presence   => true,
     :uniqueness => true,
     :format     => { :with =>  /^\w[a-z0-9_-]*$/i }

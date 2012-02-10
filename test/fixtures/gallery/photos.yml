@@ -1,7 +1,6 @@
 default:
   gallery: default
   title: Default Photo
-  slug: default-photo
   description: Photo Description
   position: 0
   image_file_name: default.jpg

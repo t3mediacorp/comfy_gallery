@@ -126,7 +126,7 @@ Gem::Specification.new do |s|
     "lib/comfy_gallery/engine.rb",
     "lib/comfy_gallery/form_builder.rb",
     "lib/generators/comfy/gallery/README",
-    "lib/generators/comfy/gallery/comfy_gallery_generator.rb",
+    "lib/generators/comfy/gallery/gallery_generator.rb",
     "lib/paperclip_processors/cropper.rb",
     "lib/tasks/comfy_gallery.rake",
     "script/rails",

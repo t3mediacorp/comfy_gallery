@@ -24,13 +24,7 @@ class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
       )
       title = title + " #{i + 1}" if file_params[:title] == title && file_array.size > 1
       
-      slug = (file_params[:slug].blank? && file_params[:image] ? 
-        file_params[:image].original_filename.parameterize : 
-        file_params[:slug]
-      )
-      slug = (slug + "-#{i + 1}") if file_params[:slug] == slug && file_array.size > 1
-      
-      @photo = Gallery::Photo.new({:gallery => @gallery}.merge(file_params.merge(:title => title, :slug => slug) || {}))
+      @photo = Gallery::Photo.new({:gallery => @gallery}.merge(file_params.merge(:title => title) || {}))
       @photo.save!
     end
     

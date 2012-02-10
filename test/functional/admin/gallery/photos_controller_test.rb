@@ -29,7 +29,6 @@ class Admin::Gallery::PhotosControllerTest < ActionController::TestCase
     assert_difference 'Gallery::Photo.count' do
       post :create, :gallery_id => gallery_galleries(:default), :gallery_photo => {
         :title  => 'Test Photo',
-        :slug   => 'test-photo',
         :image  => [fixture_file_upload('/files/default.jpg', 'image/jpeg')]
       }
       assert_response :redirect
@@ -38,11 +37,10 @@ class Admin::Gallery::PhotosControllerTest < ActionController::TestCase
       
       photo = Gallery::Photo.last
       assert_equal 'Test Photo', photo.title
-      assert_equal 'test-photo', photo.slug
     end
   end
   
-  def test_create_without_title_or_slug
+  def test_create_without_title
     assert_difference 'Gallery::Photo.count', 2 do
       post :create, :gallery_id => gallery_galleries(:default), :gallery_photo => {
         :image  => [fixture_file_upload('/files/default.jpg', 'image/jpeg')]
@@ -53,16 +51,13 @@ class Admin::Gallery::PhotosControllerTest < ActionController::TestCase
       
       photo = Gallery::Photo.last
       assert_equal 'default.jpg', photo.title
-      assert_equal 'default-jpg', photo.slug
       
       post :create, :gallery_id => gallery_galleries(:default), :gallery_photo => {
-        :slug   => 'Testrrr',
         :image  => [fixture_file_upload('/files/default.jpg', 'image/jpeg')]
       }
       
       photo = Gallery::Photo.last
       assert_equal 'default.jpg', photo.title
-      assert_equal 'Testrrr', photo.slug
     end
   end
 
@@ -82,7 +77,6 @@ class Admin::Gallery::PhotosControllerTest < ActionController::TestCase
     assert_difference 'Gallery::Photo.count', 2 do
       post :create, :gallery_id => gallery_galleries(:default), :gallery_photo => {
         :title  => 'Test Photo',
-        :slug   => 'test-photo',
         :image  => [
           fixture_file_upload('/files/default.jpg', 'image/jpeg'),
           fixture_file_upload('/files/default.jpg', 'image/jpeg')
@@ -97,8 +91,6 @@ class Admin::Gallery::PhotosControllerTest < ActionController::TestCase
       assert_equal 'default.jpg', photo_b.image_file_name
       assert_equal 'Test Photo 1', photo_a.title
       assert_equal 'Test Photo 2', photo_b.title
-      assert_equal 'test-photo-1', photo_a.slug
-      assert_equal 'test-photo-2', photo_b.slug
       assert_equal 'Photo created', flash[:notice]
     end
   end
@@ -162,7 +154,6 @@ class Admin::Gallery::PhotosControllerTest < ActionController::TestCase
     photo_two = Gallery::Photo.create!(
       :gallery  => gallery,
       :title    => 'Test Photo',
-      :slug     => 'test-photo',
       :image    => fixture_file_upload('/files/default.jpg', 'image/jpeg')
     )
     assert_equal 0, photo_one.position
@@ -205,14 +196,13 @@ class Admin::Gallery::PhotosControllerTest < ActionController::TestCase
   
   def test_crop_thumbnail_and_full
     gallery = Gallery::Gallery.create!(
-      :title            => "Title",
-      :slug             => "title",
+      :title            => 'test',
+      :identifier       => 'test',
       :force_ratio_full => true
     )
     photo = Gallery::Photo.create!(
       :gallery  => gallery,
       :title    => 'Test Photo',
-      :slug     => 'test-photo',
       :image    => fixture_file_upload('/files/default.jpg', 'image/jpeg')
     )
     put :update, :gallery_id => gallery, :id => photo, :photo => {

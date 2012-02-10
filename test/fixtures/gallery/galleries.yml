@@ -1,6 +1,6 @@
 default:
   title: Default Gallery
-  slug: default-gallery
+  identifier: default-gallery
   description: Gallery Description
   full_width: 800
   full_height: 600

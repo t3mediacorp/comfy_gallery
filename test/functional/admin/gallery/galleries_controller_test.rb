@@ -20,7 +20,7 @@ class Admin::Gallery::GalleriesControllerTest < ActionController::TestCase
     assert_difference 'Gallery::Gallery.count', 1 do
       post :create, :gallery => {
         :title        => 'Test Gallery',
-        :slug         => 'test-gallery',
+        :identifier   => 'test-gallery',
         :description  => 'Test Description'
       }
     end

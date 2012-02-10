@@ -28,7 +28,7 @@
         <%= link_to gallery_path(gallery), gallery_path(gallery), :target => '_blank' %>
       </td>
       <td class='embed'>
-        {{ cms:helper:render_gallery:<%= gallery.slug  %> }}
+        {{ cms:helper:render_gallery:<%= gallery.identifier  %> }}
       </td>
       <td class='action_links'>
         <%= link_to 'Show Photos', admin_gallery_gallery_photos_path(gallery) %>
