@@ -11,7 +11,7 @@ Add gem definition to your Gemfile:
 Then from the Rails project's root run:
     
     bundle install
-    rails generate comfy_gallery
+    rails generate comfy:gallery
     rake db:migrate
 
 ## Usage
