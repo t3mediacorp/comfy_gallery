@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oleg Khabarov", "Stephen McLeod", "The Working Group Inc."]
-  s.date = "2012-01-20"
+  s.date = "2012-02-10"
   s.description = ""
   s.email = "oleg@twg.ca"
   s.extra_rdoc_files = [
@@ -125,8 +125,8 @@ Gem::Specification.new do |s|
     "lib/comfy_gallery/configuration.rb",
     "lib/comfy_gallery/engine.rb",
     "lib/comfy_gallery/form_builder.rb",
-    "lib/generators/README",
-    "lib/generators/comfy_gallery_generator.rb",
+    "lib/generators/comfy/gallery/README",
+    "lib/generators/comfy/gallery/comfy_gallery_generator.rb",
     "lib/paperclip_processors/cropper.rb",
     "lib/tasks/comfy_gallery.rake",
     "script/rails",
