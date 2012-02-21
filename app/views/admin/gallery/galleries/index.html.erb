@@ -10,8 +10,6 @@
   <tr>
     <th> Preview </th>
     <th> Name </th>
-    <th> URL </th>
-    <th> Embed Code </th>
     <th> Actions </th>
   </tr>
   <% @galleries.each do |gallery| %>
@@ -23,12 +21,6 @@
       </td>
       <td class='main'>
         <%= link_to gallery.title, admin_gallery_gallery_photos_path(gallery) %>
-      </td>
-      <td>
-        <%= link_to gallery_path(gallery), gallery_path(gallery), :target => '_blank' %>
-      </td>
-      <td class='embed'>
-        {{ cms:helper:render_gallery:<%= gallery.identifier  %> }}
       </td>
       <td class='action_links'>
         <%= link_to 'Show Photos', admin_gallery_gallery_photos_path(gallery) %>

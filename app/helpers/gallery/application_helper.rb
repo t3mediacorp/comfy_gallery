@@ -9,22 +9,4 @@ module Gallery::ApplicationHelper
     )
   end
   
-  def render_gallery(slug, type = 'thumbnails')
-    @gallery = Gallery::Gallery.find_by_slug(slug)
-    if (@gallery)
-      render :partial => "gallery/#{type}"
-    else
-      render :text => 'Gallery not found', :status => 404
-    end
-  end
-  
-  def render_galleries(type = 'list_galleries')
-    @galleries = Gallery::Gallery.all
-    if (@galleries)
-      render :partial => "gallery/#{type}"
-    else
-      render :text => 'Gallery not found', :status => 404
-    end
-  end
-  
 end

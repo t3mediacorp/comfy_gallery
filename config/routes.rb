@@ -10,8 +10,4 @@ Rails.application.routes.draw do
       end
     end
   end unless ComfyGallery.config.admin_route_prefix.blank?
-  
-  scope :module => :gallery do
-    resources :galleries, :only => [:show, :index]
-  end
 end

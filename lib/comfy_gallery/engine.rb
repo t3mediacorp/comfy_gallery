@@ -15,7 +15,6 @@ module ComfyGallery
         end
         # applying nav elements
         ComfortableMexicanSofa::ViewHooks.add(:navigation, '/admin/gallery/navigation')
-        ComfortableMexicanSofa::ViewHooks.add(:html_head, '/admin/gallery/html_head')
       end
     end
   end
