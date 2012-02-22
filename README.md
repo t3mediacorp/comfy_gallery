@@ -23,6 +23,17 @@ You probably want to set the admin controller to be something that handles user 
 
 If you are using ComfyGallery in conjunction with ComfortableMexicanSofa everything will be configured automatically.
 
+There's no front-end to this engine. Feel free to access galleries like such: `Gallery::Gallery.find_by_identifier('my_gallery)` and cycle through the `photos`.
+
+Also you may use provided [ColorBox](http://jacklmoore.com/colorbox/) javascript to display galleries. Just declare these for asset pipeline
+    
+    // in app/assets/javascripts/application.js
+    //= require comfy_gallery/jquery.colorbox
+    
+    // in app/assets/stylesheets/application.css
+    //= require comfy_gallery/colorbox
+
+---
 
 CMS Gallery is released under the [MIT license](https://github.com/twg/sofa-gallery/raw/master/LICENSE) 
 
