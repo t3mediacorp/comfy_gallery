@@ -1,39 +1,39 @@
-ENV["RAILS_ENV"] = "test"
-require File.expand_path('../../config/environment', __FILE__)
+require 'coveralls'
+Coveralls.wear!('rails')
+
+ENV['RAILS_ENV'] = 'test'
+
+require_relative '../config/environment'
 require 'rails/test_help'
+require 'rails/generators'
+
+Rails.backtrace_cleaner.remove_silencers!
+
+# Load fixtures from the engine
+ActiveSupport::TestCase.fixture_path = File.expand_path('../fixtures', __FILE__)
 
 class ActiveSupport::TestCase
   
   fixtures :all
-  include ActionDispatch::TestProcess
-  
-  def setup
-    reset_config
-  end
-  
-  # resetting default configuration
-  def reset_config
-    ComfyGallery.configure do |config|
-      config.admin_route_prefix = 'admin'
-      config.upload_options     = { }
-      config.admin_controller   = 'ApplicationController'
-      config.form_builder       = 'ComfyGallery::FormBuilder'
-    end
-  end
   
   # Example usage:
-  #   assert_has_errors_on( @record, [:field_1, :field_2] )
-  #   assert_has_errors_on( @record, {:field_1 => 'Message1', :field_2 => 'Message 2'} )
-  def assert_has_errors_on(record, fields)
-    fields = [fields].flatten unless fields.is_a?(Hash)
-    fields.each do |field, message|
-      assert record.errors.to_hash.has_key?(field.to_sym), "#{record.class.name} should error on invalid #{field}"
-      if message && record.errors[field].is_a?(Array) && !message.is_a?(Array)
-        assert_not_nil record.errors[field].index(message)
-      elsif message
-        assert_equal message, record.errors[field]
-      end
-    end
+  #   assert_has_errors_on @record, :field_1, :field_2
+  def assert_errors_on(record, *fields)
+    unmatched = record.errors.keys - fields.flatten
+    assert unmatched.blank?, "#{record.class} has errors on '#{unmatched.join(', ')}'"
+    unmatched = fields.flatten - record.errors.keys
+    assert unmatched.blank?, "#{record.class} doesn't have errors on '#{unmatched.join(', ')}'"
+  end
+  
+end
+
+class ActionController::TestCase
+  
+  setup :set_basic_auth
+  
+  # CMS by default is going to prompt with basic auth request
+  def set_basic_auth
+    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64('username:password')}"
   end
   
 end

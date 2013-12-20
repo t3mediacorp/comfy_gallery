@@ -1,21 +1,24 @@
-require File.expand_path('../config/application', __FILE__)
-require 'rubygems'
-require 'rake'
+require_relative 'config/application'
 
-ComfyGallery::Application.load_tasks
+ComfyBlog::Application.load_tasks
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name        = 'comfy_gallery'
-    gem.homepage    = 'http://github.com/comfy/comfy-gallery'
-    gem.license     = 'MIT'
-    gem.summary     = 'ComfyGallery is an image gallery engine for Rails 3.1 apps (and ComfortableMexicanSofa)'
-    gem.description = ''
-    gem.email       = 'oleg@twg.ca'
-    gem.authors     = ['Oleg Khabarov', 'Stephen McLeod', 'The Working Group Inc.']
+namespace :test do
+  
+  Rake::TestTask.new(:lib) do |t|
+    t.libs << 'test'
+    t.pattern = 'test/lib/**/*_test.rb'
+    t.verbose = true
   end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
+  
+  Rake::TestTask.new(:generators) do |t|
+    t.libs << 'test'
+    t.pattern = 'test/generators/**/*_test.rb'
+    t.verbose = true
+  end
+  
+end
+
+Rake::Task[:test].enhance do
+  Rake::Task['test:lib'].invoke
+  Rake::Task['test:generators'].invoke
 end

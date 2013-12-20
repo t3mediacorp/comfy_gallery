@@ -1,10 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'rails',        '>=3.1.0'
-gem 'paperclip',    '>=2.3.0'
-gem 'jquery-rails', '>=1.0.14'
+gemspec
 
 group :development do
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+end
+
+group :test do
   gem 'sqlite3'
-  gem 'jeweler'
+  gem 'coveralls', :require => false
 end
