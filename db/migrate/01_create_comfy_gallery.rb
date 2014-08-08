@@ -1,5 +1,6 @@
 class CreateComfyGallery < ActiveRecord::Migration
   def self.up 
+    drop_table :gallery_galleries if table_exists?(:gallery_galleries)
     create_table :gallery_galleries do |t|
       t.string  :title,               :null => false
       t.string  :identifier,          :null => false
@@ -12,8 +13,9 @@ class CreateComfyGallery < ActiveRecord::Migration
       t.boolean :force_ratio_thumb,   :null => false, :default => true
       t.timestamps
     end
-    add_index :gallery_galleries, :identifier, :uniq => true
+    add_index :gallery_galleries, :identifier, :unique => true
     
+    drop_table :gallery_photos if table_exists?(:gallery_photos)
     create_table :gallery_photos do |t|
       t.integer :gallery_id, :null => false
       t.string  :title

@@ -1,0 +1,15 @@
+.page-header
+	= link_to "Back to Galleries", admin_gallery_galleries_path
+
+	= link_to 'Add new photo', new_admin_gallery_gallery_photo_path(@gallery), :class => 'btn btn-default pull-right'
+	%h2= "Photos for #{@gallery.title}"
+
+- content_for :right_column do
+	= render 'comfy/admin/cms/sites/mirrors'
+
+= render 'comfy/admin/cms/partials/layouts_before'
+
+%ul.list.sortable
+	= render :partial => 'index_branch', :collection => @photos
+= render 'comfy/admin/cms/partials/layouts_after'
+

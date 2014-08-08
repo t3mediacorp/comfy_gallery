@@ -9,6 +9,6 @@
 <%= form.text_field :thumb_height %>
 <%= form.check_box :force_ratio_thumb, :label => "Force Ratio" %>
 
-<%= render :partial => 'cms_admin/categories/form', :object => form if defined?(ComfortableMexicanSofa) %>
+<%= render :partial => 'comfy/admin/cms/categories/form', :object => form if defined?(ComfortableMexicanSofa) %>
 
 <%= form.submit 'Save' %>

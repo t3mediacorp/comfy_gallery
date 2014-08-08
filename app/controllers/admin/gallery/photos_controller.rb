@@ -13,10 +13,11 @@ class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
   end
   
   def create
-    file_array  = params[:gallery_photo][:image] || [nil]
+    p_params = photo_params
+    file_array  = p_params[:gallery_photo][:image] || [nil]
     
     file_array.each_with_index do |file, i|
-      file_params = params[:gallery_photo].merge(:image => file)
+      file_params = p_params[:gallery_photo].merge(:image => file)
       
       title = (file_params[:title].blank? && file_params[:image] ? 
         file_params[:image].original_filename : 
@@ -40,7 +41,7 @@ class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
   end
   
   def update
-    @photo.update_attributes!(params[:gallery_photo])
+    @photo.update_attributes!(photo_params[:gallery_photo])
     flash[:notice] = 'Photo updated'
     redirect_to :action => :index
   rescue ActiveRecord::RecordInvalid
@@ -55,7 +56,7 @@ class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
   end
   
   def reorder
-    (params[:gallery_photo] || []).each_with_index do |id, index|
+    (photo_params[:gallery_photo] || []).each_with_index do |id, index|
       if (photo = Gallery::Photo.find_by_id(id))
         photo.update_attribute(:position, index)
       end
@@ -70,21 +71,27 @@ class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
 protected
   
   def load_gallery
-    @gallery = Gallery::Gallery.find(params[:gallery_id])
+    @gallery = Gallery::Gallery.find(photo_params[:gallery_id])
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Gallery not found'
     redirect_to admin_gallery_galleries_path
   end
   
   def load_photo
-    @photo = @gallery.photos.find(params[:id])
+    @photo = @gallery.photos.find(photo_params[:id])
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Photo not found'
     redirect_to :action => :index
   end
   
   def build_photo
-    @photo = Gallery::Photo.new({:gallery => @gallery}.merge(params[:sofa_gallery_photo] || {}))
+
+    @photo = Gallery::Photo.new({:gallery => @gallery}.merge(photo_params[:sofa_gallery_photo] || {}))
   end
   
+  def photo_params
+    params.permit(:gallery_photo, :sofa_gallery_photo, :gallery, :gallery_id)
+    params.permit!
+  end
+
 end

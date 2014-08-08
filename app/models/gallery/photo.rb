@@ -1,6 +1,11 @@
+
 class Gallery::Photo < ActiveRecord::Base
-  
   self.table_name = :gallery_photos
+
+  include ComfortableMexicanSofa::HasRevisions
+    
+  cms_has_revisions_for( :title, :description, :image_file_name, :position )
+
   
   upload_options = (ComfyGallery.config.upload_options || {}).merge(
     :styles => lambda { |image|

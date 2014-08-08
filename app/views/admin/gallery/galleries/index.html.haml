@@ -1,0 +1,17 @@
+.page-header
+  = link_to 'Add new gallery', new_admin_gallery_gallery_path, :class => 'btn btn-default pull-right'
+  %h2 Galleries
+
+  =render :partial => 'comfy/admin/cms/categories/index', :object => 'SofaGallery::Gallery' if defined?(ComfortableMexicanSofa)
+
+- content_for :right_column do
+  = render 'comfy/admin/cms/sites/mirrors'
+
+= render 'comfy/admin/cms/partials/layouts_before'
+
+%ul.list.sortable
+  = render :partial => 'index_branch', :collection => @galleries
+= render 'comfy/admin/cms/partials/layouts_after'
+
+- content_for :header do
+  =stylesheet_link_tag 'comfy_gallery/gallery'

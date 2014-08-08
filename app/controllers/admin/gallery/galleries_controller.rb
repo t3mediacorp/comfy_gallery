@@ -1,7 +1,7 @@
 class Admin::Gallery::GalleriesController < Admin::Gallery::BaseController
   
   before_filter :load_gallery,  :except => [:index, :new, :create]
-  before_filter :build_gallery, :only   => [:new, :create]
+  before_filter :build_gallery, :only   => [:create]
   
   def index
     if params[:category].present?
@@ -12,6 +12,7 @@ class Admin::Gallery::GalleriesController < Admin::Gallery::BaseController
   end
   
   def new
+    @gallery = Gallery::Gallery.new
     render
   end
   
@@ -33,7 +34,7 @@ class Admin::Gallery::GalleriesController < Admin::Gallery::BaseController
   end
   
   def update
-    @gallery.update_attributes!(params[:gallery])
+    @gallery.update_attributes!(gallery_params[:gallery])
     flash[:notice] = 'Gallery updated'
     redirect_to :action => :index
   rescue ActiveRecord::RecordInvalid
@@ -57,7 +58,12 @@ protected
   end
   
   def build_gallery
-    @gallery = Gallery::Gallery.new(params[:gallery])
+    @gallery = Gallery::Gallery.new(gallery_params[:gallery])
   end
   
+  def gallery_params
+    params.require(:gallery).permit(:title,:identifier,:description,:full_width,:full_height,:force_ratio_full,:thumb_width,:thumb_height,:force_ratio_thumb)
+    params.permit!
+  end
+
 end

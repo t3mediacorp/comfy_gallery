@@ -1,0 +1,12 @@
+=form.text_field :title
+-if @photo.image? && @photo.id.present?
+	= image_tag(@photo.image.url(:thumb))
+
+	/ !!! JWilliams - crop does not work at the moment
+	/ = link_to 'Crop Image', crop_admin_gallery_gallery_photo_path(@gallery, @photo) if @photo.force_aspect?
+-else
+	= form.file_field :image, :multiple => true
+
+= form.text_area :description, :class => 'short'
+
+= form.submit 'Save'
