@@ -14,32 +14,13 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README.md"
   ]
-  s.files = [
-    ".document",
-    ".travis.yml",
-    "Gemfile",
-    "LICENSE",
-    "README.md",
-    "Rakefile",
-    "VERSION",
-    "{app,config,db,lib}/**/*",
-    "test/fixtures/files/default.jpg",
-    "test/fixtures/files/default.txt",
-    "test/fixtures/files/default2.jpg",
-    "test/fixtures/gallery/galleries.yml",
-    "test/fixtures/gallery/photos.yml",
-    "test/functional/admin/gallery/galleries_controller_test.rb",
-    "test/functional/admin/gallery/photos_controller_test.rb",
-    "test/test_helper.rb",
-    "test/unit/configuration_test.rb",
-    "test/unit/gallery_test.rb",
-    "test/unit/photo_test.rb"
-  ]
-  s.homepage = "http://github.com/comfy/comfy-gallery"
-  s.licenses = ["MIT"]
+  s.files      = `git ls-files`.split("\n")
+  s.test_files = `git ls-files -- {spec,features}/*`.split("\n")
+  s.homepage   = "http://github.com/comfy/comfy-gallery"
+  s.licenses   = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"
-  s.summary = "ComfyGallery is an image gallery engine for Rails 3.1 apps (and ComfortableMexicanSofa)"
+  s.summary = "ComfyGallery is an image gallery engine for Rails 4 apps (and ComfortableMexicanSofa)"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
