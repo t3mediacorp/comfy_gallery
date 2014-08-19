@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
-    "{app,config,db,lib}/**/*"
+    "{app,config,db,lib}/**/*",
     "sofa_gallery.gemspec",
     "test/fixtures/files/default.jpg",
     "test/fixtures/files/default.txt",

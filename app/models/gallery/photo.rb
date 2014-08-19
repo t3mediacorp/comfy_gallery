@@ -4,7 +4,7 @@ class Gallery::Photo < ActiveRecord::Base
 
   include ComfortableMexicanSofa::HasRevisions
     
-  cms_has_revisions_for( :title, :description, :image_file_name, :position )
+  cms_has_revisions_for( :title, :description, :image_file_name, :position, :url )
 
   
   upload_options = (ComfyGallery.config.upload_options || {}).merge(

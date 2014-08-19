@@ -7,6 +7,7 @@
 -else
 	= form.file_field :image, :multiple => true
 
+= form.text_field :url, :label => "Link To"
 = form.text_area :description, :class => 'short'
 
 = form.submit 'Save'
