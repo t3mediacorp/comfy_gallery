@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "{app,config,db,lib}/**/*",
-    "sofa_gallery.gemspec",
     "test/fixtures/files/default.jpg",
     "test/fixtures/files/default.txt",
     "test/fixtures/files/default2.jpg",
