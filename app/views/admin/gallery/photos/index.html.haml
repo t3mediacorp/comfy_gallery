@@ -1,3 +1,6 @@
+- content_for :head do
+	=stylesheet_link_tag 'comfy_gallery/gallery.css'
+
 .page-header
 	= link_to "Back to Galleries", admin_gallery_galleries_path
 
@@ -9,7 +12,9 @@
 
 = render 'comfy/admin/cms/partials/layouts_before'
 
-%ul.list.sortable
+%ul.list.sortable{:id => 'gallery'}
 	= render :partial => 'index_branch', :collection => @photos
+
+
 = render 'comfy/admin/cms/partials/layouts_after'
 

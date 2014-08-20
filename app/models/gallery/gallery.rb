@@ -16,5 +16,7 @@ class Gallery::Gallery < ActiveRecord::Base
     :presence   => true,
     :uniqueness => true,
     :format     => { :with =>  /\A\w[a-z0-9_-]*\z/i }
-    
+ 
+  default_scope -> { order('gallery_galleries.title') }  
+
 end

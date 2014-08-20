@@ -5,16 +5,14 @@
     .icon
       - gallery.photos.limit(1).each do |photo|
         =image_tag(photo.image.url(:admin_thumb))
-
-          
-    .btn-group.btn-group-sm
-      = link_to "Show Photos", admin_gallery_gallery_photos_path(gallery), :class => 'btn btn-default'
-      = link_to t('.edit'), edit_admin_gallery_gallery_path(gallery), :class => 'btn btn-default'
-      = link_to t('.delete'), admin_gallery_gallery_path(gallery), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger'
     
     .item-content
+      .btn-group.btn-group-sm
+        = link_to "Show Photos", admin_gallery_gallery_photos_path(gallery), :class => 'btn btn-default'
+        = link_to t('.edit'), edit_admin_gallery_gallery_path(gallery), :class => 'btn btn-default'
+        = link_to t('.delete'), admin_gallery_gallery_path(gallery), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger'
+    
       .item-title
         = link_to gallery.title, admin_gallery_gallery_photos_path(gallery)
       .item-meta
         = gallery.identifier
-

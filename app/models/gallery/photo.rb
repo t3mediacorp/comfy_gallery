@@ -27,6 +27,7 @@ class Gallery::Photo < ActiveRecord::Base
   
   # -- Relationships --------------------------------------------------------
   belongs_to :gallery
+  default_scope -> { order('gallery_photos.position') }  
   
   # -- Callbacks ------------------------------------------------------------
   before_create :assign_position

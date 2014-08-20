@@ -1,0 +1,30 @@
+/* Override the standard Comfy dragger stuff as it puts in a document icon that 
+   screws up the gallery thumbnail.
+*/
+body#comfy ul#gallery li {
+  .icon {
+    width: 48px;
+    height: 24px;
+    padding-right: 12px;
+    background: white;
+
+    .dragger {
+    	float: left;
+      width: 28px;
+      height: 28px;
+      background: none;
+      cursor: move;
+      display: block;
+    }
+    &:hover .dragger {
+      display: block;
+      z-index: 100;
+    }
+  }
+}
+
+.edit_gallery_photo {
+	img {
+		padding-bottom: 2em;
+	}
+}
