@@ -13,7 +13,7 @@ class PhotoTest < ActiveSupport::TestCase
     assert photo.invalid?
     assert_has_errors_on photo, {
       :gallery_id       => ["can't be blank"],
-      :image_file_name  => ["There was no file uploaded!"]
+      :image_file_name  => ["can't be blank"]
     }
   end
   

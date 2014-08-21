@@ -29,12 +29,9 @@ class Admin::Gallery::GalleriesControllerTest < ActionController::TestCase
   end
   
   def test_creation_failure
-    assert_no_difference 'Gallery::Gallery.count' do
+    assert_raises(ActionController::ParameterMissing) do
       post :create, :gallery => { }
     end
-    assert_response :success
-    assert_template 'new'
-    assert_equal 'Failed to create Gallery', flash[:error]
   end
   
   def test_get_edit

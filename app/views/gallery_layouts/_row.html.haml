@@ -1,0 +1,17 @@
+-# Expected variables:
+-#		gallery - Gallery of images to display
+-#		cols - # of columns
+
+- if gallery.present?
+	%section.photos.photos2.row
+		.columns.small-12.small-centered
+			%h3= gallery.title
+			%ul.small-block-grid-#{cols}
+				- gallery.photos.each do |photo, index|
+					- break if index >= cols
+					%li
+						= link_to photo.url, title: photo.title do
+							=image_tag(photo.image.url, alt: photo.title, size: '320x220')
+							%h5= photo.title
+
+

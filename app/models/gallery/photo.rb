@@ -1,10 +1,7 @@
-
 class Gallery::Photo < ActiveRecord::Base
   self.table_name = :gallery_photos
 
-  include ComfortableMexicanSofa::HasRevisions
-    
-  cms_has_revisions_for( :title, :description, :image_file_name, :position, :url )
+  cms_has_revisions_for :title, :description, :image_file_name, :position, :url if defined?(ComfortableMexicanSofa)
 
   
   upload_options = (ComfyGallery.config.upload_options || {}).merge(
@@ -38,6 +35,8 @@ class Gallery::Photo < ActiveRecord::Base
     :presence => true
   validates_attachment_presence :image,
     :message      => 'There was no file uploaded!'
+  validates :image_file_name, presence: true
+  
   validates_attachment_content_type :image,
     :content_type => %w(image/jpeg image/pjpeg image/gif image/png image/x-png),
     :message      => 'Please only upload .jpg, .jpeg, .gif or .png files.'

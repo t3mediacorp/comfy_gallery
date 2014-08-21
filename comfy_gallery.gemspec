@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rails>, [">= 3.1.0"])
       s.add_runtime_dependency(%q<paperclip>, [">= 2.3.0"])
       s.add_runtime_dependency(%q<jquery-rails>, [">= 1.0.14"])
+      s.add_runtime_dependency(%q<haml-rails>, [">= 0.5.3"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
     else

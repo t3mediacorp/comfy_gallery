@@ -1,17 +1,20 @@
 - content_for :header do
-  =stylesheet_link_tag 'comfy_gallery/gallery'
+	=stylesheet_link_tag 'comfy_gallery/gallery'
 
 .page-header
-  = link_to 'Add new gallery', new_admin_gallery_gallery_path, :class => 'btn btn-default pull-right'
-  %h2 Galleries
+	= link_to 'Add new gallery', new_admin_gallery_gallery_path, :class => 'btn btn-default pull-right'
+	%h2 Galleries
 
-  =render :partial => 'comfy/admin/cms/categories/index', :object => 'Gallery::Gallery' if defined?(ComfortableMexicanSofa)
+	=render :partial => 'comfy/admin/cms/categories/index', :object => 'Gallery::Gallery' if defined?(ComfortableMexicanSofa)
 
-- content_for :right_column do
-  = render 'comfy/admin/cms/sites/mirrors'
+- if defined?(ComfortableMexicanSofa)
+	- content_for :right_column do
+		= render 'comfy/admin/cms/sites/mirrors'
 
-= render 'comfy/admin/cms/partials/layouts_before'
+	= render 'comfy/admin/cms/partials/layouts_before'
 
 %ul.list
-  = render :partial => 'index_branch', :collection => @galleries
-= render 'comfy/admin/cms/partials/layouts_after'
+	= render :partial => 'index_branch', :collection => @galleries
+
+- if defined?(ComfortableMexicanSofa)
+	= render 'comfy/admin/cms/partials/layouts_after'
