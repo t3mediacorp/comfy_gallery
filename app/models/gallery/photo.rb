@@ -13,7 +13,7 @@ class Gallery::Photo < ActiveRecord::Base
         :full         => { :geometry => f_settings, :processors => [:full_cropper] },
         :thumb        => { :geometry => t_settings, :processors => [:thumb_cropper] },
         :admin_full   => '800x600>',
-        :admin_thumb  => '40x30#'
+        :admin_thumb  => '80x60#'
       }
     }
   )

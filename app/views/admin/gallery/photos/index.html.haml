@@ -13,7 +13,7 @@
 
 	= render 'comfy/admin/cms/partials/layouts_before'
 
-%ul.list.sortable{:id => 'gallery'}
+%ul.list.sortable{:id => 'gallery', :class => 'gallery'}
 	= render :partial => 'index_branch', :collection => @photos
 
 - if defined?(ComfortableMexicanSofa)

@@ -1,5 +1,5 @@
-- content_for :header do
-	=stylesheet_link_tag 'comfy_gallery/gallery'
+- content_for :head do
+	=stylesheet_link_tag 'comfy_gallery/gallery.css'
 
 .page-header
 	= link_to 'Add new gallery', new_admin_gallery_gallery_path, :class => 'btn btn-default pull-right'
@@ -13,7 +13,7 @@
 
 	= render 'comfy/admin/cms/partials/layouts_before'
 
-%ul.list
+%ul.list.gallery
 	= render :partial => 'index_branch', :collection => @galleries
 
 - if defined?(ComfortableMexicanSofa)

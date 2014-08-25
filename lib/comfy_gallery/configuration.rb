@@ -19,12 +19,16 @@ module ComfyGallery
     # Name of layout to use by default
     attr_accessor :default_layout
 
+    # Number of seconds to allow an expiring URL to an S3 asset be valid. Default 10 seconds
+    attr_accessor :s3_timeout
+
     # Configuration defaults
     def initialize
       @upload_options     = { }
       @admin_route_prefix = 'admin'
       @admin_controller   = 'ApplicationController'
       @form_builder       = 'ComfyGallery::FormBuilder'
+      @s3_timeout         = 10
       @layouts            = [ {
         display_name: "3 across",
         file_name: "3_in_a_row"

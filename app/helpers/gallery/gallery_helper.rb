@@ -1,3 +1,5 @@
+# require 'comfy_gallery/configuration'
+
 module Gallery::GalleryHelper
 	#
 	# Renders a gallery of images using the gallery's layout or the default layout
@@ -12,8 +14,17 @@ module Gallery::GalleryHelper
 		
 		return if gallery.nil?
 
-		layout = gallery.layout || Gallery::Configuration.default_layout
+		layout = gallery.layout || ComfyGallery.config.default_layout
 
 		render partial: "gallery_layouts/#{layout.file_name}", locals: {gallery: gallery}
 	end
+
+	#
+	# Displays a gallery photo, ensuring we use an S3 expiring src link
+	# style - :thumb, :full, :admin_thumb, :admin_full
+	#
+	def gallery_image_tag(photo, style, options={})
+		image_tag(photo.image.expiring_url(ComfyGallery.config.s3_timeout,style), options)
+	end
+
 end

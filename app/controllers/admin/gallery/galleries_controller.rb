@@ -2,6 +2,7 @@ class Admin::Gallery::GalleriesController < Admin::Gallery::BaseController
   
   before_filter :load_gallery,  :except => [:index, :new, :create]
   before_filter :build_gallery, :only   => [:create]
+  before_filter :setup_layouts, :except => [:index, :create]
   
   def index
     if params[:category].present?
@@ -64,6 +65,14 @@ protected
   def gallery_params
     params.require(:gallery).permit(:title,:identifier,:description,:full_width,:full_height,:force_ratio_full,:thumb_width,:thumb_height,:force_ratio_thumb)
     params.permit!
+  end
+
+  # Build an array of available layouts that will display the gallery
+  def setup_layouts
+    @layouts = []
+    ComfyGallery.config.layouts.each do |layout|
+      @layouts << [layout[:display_name], layout[:file_name]]
+    end
   end
 
 end

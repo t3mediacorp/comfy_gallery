@@ -30,4 +30,13 @@ class GalleryTest < ActiveSupport::TestCase
     end
   end
   
+  def test_layouts
+    gallery = Gallery::Gallery.create!(
+      title: "Bingo",
+      identifier: "bingo",
+      layout: "3 column"
+      )
+    assert gallery.valid?
+  end
+
 end

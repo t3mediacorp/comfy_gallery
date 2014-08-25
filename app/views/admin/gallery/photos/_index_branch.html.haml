@@ -4,7 +4,7 @@
 	.item
 		.icon
 			.dragger
-				=image_tag(photo.image.url(:admin_thumb), :class => 'thumb')
+				=gallery_image_tag(photo, :admin_thumb, {class: 'thumb'})
 		=photo.title
 
 		.btn-group.btn-group-sm

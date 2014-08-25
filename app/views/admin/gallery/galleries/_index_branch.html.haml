@@ -4,7 +4,7 @@
   .item
     .icon
       - gallery.photos.limit(1).each do |photo|
-        =image_tag(photo.image.url(:admin_thumb))
+        =gallery_image_tag(photo, :admin_thumb)
     
     .item-content
       .btn-group.btn-group-sm
