@@ -7,16 +7,28 @@ module Gallery::GalleryHelper
 	def render_gallery (gallery_id_or_name)
 		id = gallery_id_or_name.to_i
 		if id != 0
-			gallery = Gallery.find(id)
+			gallery = Gallery::Gallery.find(id)
 		else
-			gallery = Gallery.find_by_name(gallery_id_or_name)
+			gallery = Gallery::Gallery.where("identifier = '#{gallery_id_or_name}'").first
 		end
 		
 		return if gallery.nil?
 
-		layout = gallery.layout || ComfyGallery.config.default_layout
-
-		render partial: "gallery_layouts/#{layout.file_name}", locals: {gallery: gallery}
+		id = gallery.layout || ComfyGallery.config.default_layout
+		if id.present?
+			# Find the layout for this id
+			ComfyGallery.config.layouts.each do |layout|
+				if layout.id == id
+					# Allow layout to get fancy and do their own rendering
+					if layout.respond_to? :render
+						return layout.render gallery
+					else
+						# Just display a partial
+						return render partial: "gallery_layouts/#{layout.partial}", locals: {gallery: gallery}
+					end
+				end
+			end
+		end
 	end
 
 	#

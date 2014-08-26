@@ -34,7 +34,7 @@ class GalleryTest < ActiveSupport::TestCase
     gallery = Gallery::Gallery.create!(
       title: "Bingo",
       identifier: "bingo",
-      layout: "3 column"
+      layout: "three"
       )
     assert gallery.valid?
   end

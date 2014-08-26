@@ -4,7 +4,7 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   
-  fixtures :all
+  fixtures 'gallery/galleries', 'gallery/photos'
   include ActionDispatch::TestProcess
   
   def setup

@@ -29,10 +29,9 @@ module ComfyGallery
       @admin_controller   = 'ApplicationController'
       @form_builder       = 'ComfyGallery::FormBuilder'
       @s3_timeout         = 10
-      @layouts            = [ {
-        display_name: "3 across",
-        file_name: "3_in_a_row"
-        }]
+      @layouts            = [
+        Gallery::Layout.new("three", "three_in_a_row")
+      ]
       @default_layout     = @layouts.first
     end
     

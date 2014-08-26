@@ -24,6 +24,11 @@ module ComfyGallery
           app.config.paths["db/migrate"] << expanded_path
         end
       end
-    end    
+    end
+
+    # Sort the layouts by display name
+    config.after_initialize do
+      ComfyGallery.config.layouts.sort! { |a,b| a.name <=> b.name }
+    end
   end
 end

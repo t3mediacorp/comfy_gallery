@@ -8,4 +8,5 @@ default:
   thumb_width: 150
   thumb_height: 150
   force_ratio_thumb: true
+  layout: default
   

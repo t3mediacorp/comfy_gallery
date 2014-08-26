@@ -71,8 +71,9 @@ protected
   def setup_layouts
     @layouts = []
     ComfyGallery.config.layouts.each do |layout|
-      @layouts << [layout[:display_name], layout[:file_name]]
+      @layouts << [layout.name, layout.id]
     end
+    @layouts
   end
 
 end
