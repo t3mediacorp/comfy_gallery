@@ -5,9 +5,11 @@
 - if defined?(ComfortableMexicanSofa) 
 	= render :partial => 'comfy/admin/cms/categories/form', :object => form 
 
-%h2 Image Properties
-%p During upload images will be resized to match the full width and height specified below. 
-%p Leave blank to retain original size.
+%hr
+.col-sm-12
+	%h3 Image Properties
+	.col-sm-12
+		%p During upload images will be resized to match the full width and height specified below. Leave blank to retain original size.
 = form.text_field :full_width 
 = form.text_field :full_height 
 = form.check_box :force_ratio_full, :label => "Force Width and Height (otherwise, original image ratio is maintained)" 
