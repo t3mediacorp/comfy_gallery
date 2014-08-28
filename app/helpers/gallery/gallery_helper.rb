@@ -44,6 +44,7 @@ module Gallery::GalleryHelper
 	#
 	# Displays a gallery photo, ensuring we use an S3 expiring src link
 	# style - :thumb, :full, :admin_thumb, :admin_full
+	# options - See Rails image_tag for available options
 	#
 	def gallery_image_tag(photo, style, options={})
 		image_tag(photo.image.expiring_url(ComfyGallery.config.s3_timeout,style), options)
