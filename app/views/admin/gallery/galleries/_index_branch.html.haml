@@ -16,3 +16,5 @@
         = link_to gallery.title, admin_gallery_gallery_photos_path(gallery)
       .item-meta
         = gallery.identifier
+      .item-meta
+        = "#{gallery.photos.length} Photos"

@@ -1,17 +1,12 @@
 # require 'comfy_gallery/configuration'
 
 module Gallery::GalleryHelper
+
 	#
 	# Renders a gallery of images using the gallery's layout or the default layout
 	#
 	def render_gallery (gallery_id_or_name)
-		id = gallery_id_or_name.to_i
-		if id != 0
-			gallery = Gallery::Gallery.find(id)
-		else
-			gallery = Gallery::Gallery.where("identifier = '#{gallery_id_or_name}'").first
-		end
-		
+		gallery = find_gallery gallery_id_or_name
 		return if gallery.nil?
 
 		id = gallery.layout || ComfyGallery.config.default_layout
@@ -28,6 +23,21 @@ module Gallery::GalleryHelper
 					end
 				end
 			end
+		end
+	end
+
+	# Loads a gallery using its identifier or its full name
+	def find_gallery(gallery_id_or_name)
+		gallery_id_or_name.strip!
+		return nil if gallery_id_or_name.nil? || gallery_id_or_name.empty?
+
+		Rails.logger.debug("Finding gallery '#{gallery_id_or_name}'")
+		id = gallery_id_or_name.to_i
+
+		if id != 0
+			return Gallery::Gallery.find(id)
+		else
+			return Gallery::Gallery.where("identifier = '#{gallery_id_or_name}'").first
 		end
 	end
 

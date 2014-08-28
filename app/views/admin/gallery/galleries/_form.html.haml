@@ -1,15 +1,15 @@
 = form.text_field :title, :id => (@gallery.new_record?? 'slugify' : nil)
-= form.text_field :identifier, :id => 'slug'
+= form.text_field :identifier, :id => 'slug', :label => "Unique Identifier for this Gallery"
 = form.text_area  :description
 = form.select :layout, options_for_select(@layouts, @gallery.layout), {include_blank: false}
 - if defined?(ComfortableMexicanSofa) 
 	= render :partial => 'comfy/admin/cms/categories/form', :object => form 
 
-/ %h2 Image Properties
-
-/ = form.text_field :full_width 
-/ = form.text_field :full_height 
-/ = form.check_box :force_ratio_full, :label => "Force Ratio" 
+%h2 Image Properties
+%p During upload images will be resized to match the full width and height specified below.
+= form.text_field :full_width 
+= form.text_field :full_height 
+= form.check_box :force_ratio_full, :label => "Force Ratio" 
 / = form.text_field :thumb_width 
 / = form.text_field :thumb_height 
 / = form.check_box :force_ratio_thumb, :label => "Force Ratio" 

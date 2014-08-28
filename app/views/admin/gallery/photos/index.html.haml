@@ -4,6 +4,8 @@
 
 	= link_to 'Add new photo', new_admin_gallery_gallery_photo_path(@gallery), :class => 'btn btn-default pull-right'
 	%h2= "Photos for #{@gallery.title}"
+	- if @photos.count > 0
+		%h5= "#{@photos.length} Photos"
 
 - if defined?(ComfortableMexicanSofa)
 	- content_for :right_column do
