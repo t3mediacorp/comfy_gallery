@@ -20,7 +20,7 @@ class Admin::Gallery::GalleriesController < Admin::Gallery::BaseController
   def create
     @gallery.save!
     flash[:notice] = 'Gallery created'
-    redirect_to :action => :index
+    redirect_to admin_gallery_gallery_photos_path(@gallery)
   rescue ActiveRecord::RecordInvalid
     flash.now[:error] = 'Failed to create Gallery'
     render :action => :new

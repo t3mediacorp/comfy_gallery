@@ -6,12 +6,13 @@
 	= render :partial => 'comfy/admin/cms/categories/form', :object => form 
 
 %h2 Image Properties
-%p During upload images will be resized to match the full width and height specified below.
+%p During upload images will be resized to match the full width and height specified below. 
+%p Leave blank to retain original size.
 = form.text_field :full_width 
 = form.text_field :full_height 
-= form.check_box :force_ratio_full, :label => "Force Ratio" 
+= form.check_box :force_ratio_full, :label => "Force Width and Height (otherwise, original image ratio is maintained)" 
 / = form.text_field :thumb_width 
 / = form.text_field :thumb_height 
-/ = form.check_box :force_ratio_thumb, :label => "Force Ratio" 
+/ = form.check_box :force_ratio_thumb, :label => "Force Width and Height (otherwise, original image ratio is maintained)" 
 
 = form.submit 'Save' 
