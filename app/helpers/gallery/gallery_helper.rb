@@ -66,11 +66,13 @@ module Gallery::GalleryHelper
 	#
 	def gallery_image_with_link(photo, style, tags=nil, options={}, &block)
 		if tags.nil? || photo.tags.nil? || photo.tags.empty? || !(photo.tags & tags).empty?
-			link_to photo.url, title: photo.title do
+			link_to photo.url, title: photo.title, class: 'photo-link' do
 				gallery_image_tag(photo, 'full', options) + capture(&block) if block_given?
 			end
 		else
-			gallery_image_tag(photo, 'full', options) + capture(&block) if block_given?
+			content_tag :div, class: 'photo-link' do
+				gallery_image_tag(photo, 'full', options) + capture(&block) if block_given?
+			end
 		end
 	end
 end
