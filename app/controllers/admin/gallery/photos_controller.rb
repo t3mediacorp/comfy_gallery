@@ -1,3 +1,5 @@
+require 'pry'
+
 class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
   
   before_filter :load_gallery
@@ -78,19 +80,17 @@ protected
   end
   
   def load_photo
-    @photo = @gallery.photos.find(photo_params[:id])
+    @photo = @gallery.photos.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Photo not found'
     redirect_to :action => :index
   end
   
   def build_photo
-
     @photo = Gallery::Photo.new({:gallery => @gallery}.merge(photo_params[:sofa_gallery_photo] || {}))
   end
   
   def photo_params
-    params.permit(:gallery_photo, :sofa_gallery_photo, :gallery, :gallery_id)
     params.permit!
   end
 

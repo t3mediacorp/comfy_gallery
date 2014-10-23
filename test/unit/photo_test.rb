@@ -1,4 +1,5 @@
 require File.expand_path('../test_helper', File.dirname(__FILE__))
+require 'pry'
 
 class PhotoTest < ActiveSupport::TestCase
   
@@ -28,4 +29,21 @@ class PhotoTest < ActiveSupport::TestCase
     end
   end
   
+  def test_tags
+    binding.pry
+    gallery = gallery_galleries(:default)
+    assert_difference 'Gallery::Photo.count' do
+      Gallery::Photo.create!(
+        :gallery  => gallery,
+        :title    => 'Test Photo',
+        :image    => fixture_file_upload('/files/default.jpg', 'image/jpeg')
+      )
+    end
+
+    photo = gallery.photos.first
+    photo.tags.add 'photos'
+    photo.tags.add 'footage'
+    assert_equal 2, photo.tags.length
+  end
+
 end

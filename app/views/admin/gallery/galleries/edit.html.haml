@@ -1,4 +1,6 @@
 .page-header
+	= link_to t('admin.gallery.galleries.index_branch.photos'), admin_gallery_gallery_photos_path(@gallery), :class => 'btn btn-default pull-right'
+
 	- if defined?(ComfortableMexicanSofa)
 		= link_to t('comfy.admin.edit.revision', :count => @gallery.revisions.count), admin_gallery_gallery_revisions_path(@site, @gallery), :class => 'btn btn-default pull-right'
 		

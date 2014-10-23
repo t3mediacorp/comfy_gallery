@@ -11,6 +11,7 @@ module Gallery::GalleryHelper
 
 		id = gallery.layout || ComfyGallery.config.default_layout
 		if id.present?
+
 			# Find the layout for this id
 			ComfyGallery.config.layouts.each do |layout|
 				if layout.id == id
@@ -31,7 +32,7 @@ module Gallery::GalleryHelper
 		gallery_id_or_name.strip!
 		return nil if gallery_id_or_name.nil? || gallery_id_or_name.empty?
 
-		Rails.logger.debug("Finding gallery '#{gallery_id_or_name}'")
+		#Rails.logger.debug("Finding gallery '#{gallery_id_or_name}'")
 		id = gallery_id_or_name.to_i
 
 		if id != 0
@@ -50,4 +51,26 @@ module Gallery::GalleryHelper
 		image_tag(photo.image.expiring_url(ComfyGallery.config.s3_timeout,style), options)
 	end
 
+	#
+	# Displays a photo with its corresponding link.
+	# 
+	# photo  - Gallery::Photo to display
+	# style  - Which size of photo to display (full, thumb, admin_full, admin_thumb)
+	# tags   - If not nil, this is an array of tags that determine which photos get their links
+	#          displayed. If nil, the link is displayed. If the photo has no assigned tags
+	#          the link will always be displayed.
+	# options - HTML options for photo
+	# 
+	# A block can also be specified to display extra content within the link, or
+	# below the photo if there is no link.
+	#
+	def gallery_image_with_link(photo, style, tags=nil, options={}, &block)
+		if tags.nil? || photo.tags.nil? || photo.tags.empty? || !(photo.tags & tags).empty?
+			link_to photo.url, title: photo.title do
+				gallery_image_tag(photo, 'full', options) + capture(&block) if block_given?
+			end
+		else
+			gallery_image_tag(photo, 'full', options) + capture(&block) if block_given?
+		end
+	end
 end

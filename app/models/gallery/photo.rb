@@ -1,8 +1,8 @@
 class Gallery::Photo < ActiveRecord::Base
   self.table_name = :gallery_photos
-
-  cms_has_revisions_for :title, :description, :image_file_name, :position, :url if defined?(ComfortableMexicanSofa)
-
+  if defined?(ComfortableMexicanSofa)
+    cms_has_revisions_for :title, :description, :image_file_name, :position, :url, :tags
+  end
   
   upload_options = (ComfyGallery.config.upload_options || {}).merge(
     :styles => lambda { |image|
@@ -21,11 +21,14 @@ class Gallery::Photo < ActiveRecord::Base
   
   attr_accessor :thumb_crop_x, :thumb_crop_y, :thumb_crop_w, :thumb_crop_h, 
                 :full_crop_x, :full_crop_y, :full_crop_w, :full_crop_h
-  
+
   # -- Relationships --------------------------------------------------------
   belongs_to :gallery
   default_scope -> { order('gallery_photos.position') }  
-  
+
+  # Array of arbitrary strings associated with this photo
+  serialize :tags
+
   # -- Callbacks ------------------------------------------------------------
   before_create :assign_position
   after_update :reprocess_image, :if => :cropping?

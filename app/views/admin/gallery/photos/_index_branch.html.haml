@@ -10,6 +10,8 @@
 			=photo.url
 		.item-meta
 			=photo.description
+		.item-meta
+			=photo.tags.nil? ? '' : photo.tags.join(', ')
 
 
 		.btn-group.btn-group-sm

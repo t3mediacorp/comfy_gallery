@@ -2,7 +2,7 @@
 	= link_to 'Add new gallery', new_admin_gallery_gallery_path, :class => 'btn btn-default pull-right'
 	%h2 Galleries
 
-=render :partial => 'comfy/admin/cms/categories/index', :object => 'Gallery::Gallery' if defined?(ComfortableMexicanSofa)
+/ =render :partial => 'comfy/admin/cms/categories/index', :object => 'Gallery::Gallery' if defined?(ComfortableMexicanSofa)
 
 - if defined?(ComfortableMexicanSofa)
 	- content_for :right_column do

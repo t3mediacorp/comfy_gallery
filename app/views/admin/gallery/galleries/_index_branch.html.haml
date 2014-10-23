@@ -8,7 +8,7 @@
     
     .item-content
       .btn-group.btn-group-sm
-        = link_to "Show Photos", admin_gallery_gallery_photos_path(gallery), :class => 'btn btn-default'
+        = link_to t('.photos'), admin_gallery_gallery_photos_path(gallery), :class => 'btn btn-default'
         = link_to t('.edit'), edit_admin_gallery_gallery_path(gallery), :class => 'btn btn-default'
         = link_to t('.delete'), admin_gallery_gallery_path(gallery), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-danger'
     
