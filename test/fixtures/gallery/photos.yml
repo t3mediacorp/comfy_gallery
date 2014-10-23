@@ -6,3 +6,4 @@ default:
   image_file_name: default.jpg
   image_content_type: image/jpeg
   image_file_size: 9999
+  tags: []

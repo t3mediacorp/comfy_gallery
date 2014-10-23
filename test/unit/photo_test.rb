@@ -30,7 +30,7 @@ class PhotoTest < ActiveSupport::TestCase
   end
   
   def test_tags
-    binding.pry
+    #binding.pry
     gallery = gallery_galleries(:default)
     assert_difference 'Gallery::Photo.count' do
       Gallery::Photo.create!(
@@ -41,8 +41,7 @@ class PhotoTest < ActiveSupport::TestCase
     end
 
     photo = gallery.photos.first
-    photo.tags.add 'photos'
-    photo.tags.add 'footage'
+    photo.tags = [ 'photos', 'footage' ]
     assert_equal 2, photo.tags.length
   end
 
