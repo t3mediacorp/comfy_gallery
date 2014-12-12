@@ -15,21 +15,8 @@ class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
   end
   
   def create
-    p_params = photo_params
-    file_array  = p_params[:gallery_photo][:image] || [nil]
-    
-    file_array.each_with_index do |file, i|
-      file_params = p_params[:gallery_photo].merge(:image => file)
-      
-      title = (file_params[:title].blank? && file_params[:image] ? 
-        file_params[:image].original_filename : 
-        file_params[:title]
-      )
-      title = title + " #{i + 1}" if file_params[:title] == title && file_array.size > 1
-      
-      @photo = Gallery::Photo.new({:gallery => @gallery}.merge(file_params.merge(:title => title) || {}))
-      @photo.save!
-    end
+    @photo = Gallery::Photo.new(params_for_create_and_update)
+    @photo.save!
     
     flash[:notice] = 'Photo created'
     redirect_to :action => :index
@@ -43,7 +30,7 @@ class Admin::Gallery::PhotosController < Admin::Gallery::BaseController
   end
   
   def update
-    @photo.update_attributes!(photo_params[:gallery_photo])
+    @photo.update_attributes!(params_for_create_and_update)
     flash[:notice] = 'Photo updated'
     redirect_to :action => :index
   rescue ActiveRecord::RecordInvalid
@@ -94,4 +81,22 @@ protected
     params.permit!
   end
 
+  #
+  # This returns a hash that has been setup for creating or editing an image.
+  # It ensures we have a photo title and that the image is available
+  #
+  def params_for_create_and_update
+    full_params = photo_params
+    adjusted_params = full_params[:gallery_photo]
+
+    title = (adjusted_params[:title].blank? && full_params[:image] ? 
+      full_params[:image].original_filename : 
+      adjusted_params[:title]
+    )
+    adjusted_params = {:gallery => @gallery}.merge(adjusted_params.merge(:title => title) || {})
+    if full_params[:image]
+      adjusted_params = adjusted_params.merge(:image => full_params[:image]) 
+    end
+    adjusted_params
+  end
 end
