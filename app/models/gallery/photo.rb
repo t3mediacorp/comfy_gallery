@@ -4,7 +4,7 @@ class Gallery::Photo < ActiveRecord::Base
     cms_has_revisions_for :title, :description, :image_file_name, :position, :url, :tags
   end
   
-  upload_options = (ComfyGallery.config.upload_options || {}).merge(
+  upload_options = {
     :styles => lambda { |image|
       g = image.instance.gallery
       f_settings = "#{g.full_width}x#{g.full_height}#{g.force_ratio_full?? '#' : '>'}"
@@ -16,7 +16,8 @@ class Gallery::Photo < ActiveRecord::Base
         :admin_thumb  => '80x60#'
       }
     }
-  )
+  }.merge(ComfyGallery.config.upload_options || {})
+  
   has_attached_file :image, upload_options 
   
   attr_accessor :thumb_crop_x, :thumb_crop_y, :thumb_crop_w, :thumb_crop_h, 
